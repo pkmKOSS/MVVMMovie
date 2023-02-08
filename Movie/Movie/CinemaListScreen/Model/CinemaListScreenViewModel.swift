@@ -9,5 +9,5 @@ protocol CinemaListScreenViewModel {
     var onPopulareCinemaTapHandler: ((ViewData) -> ())? { get set }
     var onUpcomingCinemaTapHandler: ((ViewData) -> ())? { get set }
     var fetchImageHandler: ((String, Data) -> ())? { get set }
-    func fetchCinema()
+    func fetchCinema(typeOfCinema: TypeOfCinemaRequset)
 }

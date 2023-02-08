@@ -5,9 +5,13 @@ import Foundation
 
 /// Протокол сервис загрузки изображений
 protocol ImageService {
+    /// Метод получения изображения
+    /// - Parameters:
+    ///   - posterPath: Адрес постера
+    ///   - size: размер постера
     func fetchImage(
         posterPath: String,
         size: SizeOfImages,
-        complition: @escaping (GetImageResult) -> Void
+        completion: @escaping (GetImageResult) -> Void
     )
 }

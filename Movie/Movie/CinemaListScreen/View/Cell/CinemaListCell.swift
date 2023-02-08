@@ -14,6 +14,7 @@ final class CinemaListTableViewCell: UITableViewCell {
     private var countOfVoteLabel = UILabel()
     private var actionHandler: TapAction?
     private var cinemaDescription: Cinema?
+    private var imageData: Data?
 
     // MARK: Init
 
@@ -38,6 +39,7 @@ final class CinemaListTableViewCell: UITableViewCell {
         guard
             let cinema = cinema
         else { return }
+        self.imageData = imageData
         configureCinemaAvatarImageView(imageData: imageData ?? Data())
         configureCinemaNameLabel(title: cinema.title)
         configureCinemaDescriptionLabel(modelOverview: cinema.modelOverview)
@@ -149,15 +151,14 @@ final class CinemaListTableViewCell: UITableViewCell {
         cinemaAvatarImageView.addGestureRecognizer(recognizer)
     }
 
-    // MARK: @objc private methods
-
     @objc private func gestoreAction() {
         guard
             let tapAction = actionHandler,
-            let cinemaDescription = cinemaDescription
+            let cinemaDescription = cinemaDescription,
+            let imageData = imageData
         else {
             return
         }
-        tapAction(cinemaDescription)
+        tapAction(cinemaDescription, imageData)
     }
 }

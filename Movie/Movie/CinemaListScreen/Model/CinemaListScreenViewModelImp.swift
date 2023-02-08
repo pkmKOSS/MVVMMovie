@@ -29,31 +29,51 @@ final class CinemaListScreenViewModelImp: CinemaListScreenViewModel {
 
     // MARK: - Public methods
 
-    func fetchCinema() {
+    func fetchCinema(typeOfCinema: TypeOfCinemaRequset) {
         guard
             let getPopular = onPopulareCinemaTapHandler,
-            let fetchImage = fetchImageHandler
+            let getNew = onNewCinemaTapHandler,
+            let getUpcoming = onUpcomingCinemaTapHandler
         else { return }
-        networkManager.getCinema(typeOfRequest: .getPopular) { result in
+        networkManager.getCinema(typeOfRequest: typeOfCinema) { [ weak self] result in
+            guard let self = self else { return }
             switch result {
-            case let .succes(cinemaResponse):
-                if let cinemaLibrary = (cinemaResponse as? CinemaInfoProtocol)?
-                    .results.map({ cinema in
-                        self.fetchImage(posterPath: cinema.posterPath, size: .w500) { data in
-                            fetchImage(cinema.posterPath, data)
+                case let .succes(cinemaResponse):
+                    if let cinemaLibrary = self.makeCinemaLibrary(cinemaResponse: cinemaResponse) {
+                        switch typeOfCinema {
+                            case .getUpcoming:
+                                getUpcoming(ViewData.success(cinemaLibrary))
+                            case .getPopular:
+                                getPopular(ViewData.success(cinemaLibrary))
+                            case .getNew:
+                                getNew(ViewData.success(cinemaLibrary))
                         }
-                        return Cinema(
-                            title: cinema.title,
-                            imagePath: cinema.posterPath,
-                            modelOverview: cinema.overview,
-                            modelVoteAverage: cinema.voteAverage,
-                            modelVoteCount: cinema.voteCount
-                        )
-                    }) { getPopular(ViewData.success(cinemaLibrary)) }
-            case let .failure(cinema):
-                print("error: - \(cinema.localizedDescription)")
+                    }
+                case let .failure(cinema):
+                    print("error: - \(cinema.localizedDescription)")
             }
         }
+    }
+
+    func makeCinemaLibrary(cinemaResponse: Codable) -> [Cinema]? {
+        let cinemaLibrary = (cinemaResponse as? CinemaInfoProtocol)?.results.map({ [ weak self ] cinema in
+            self?.fetchImage(posterPath: cinema.posterPath, size: .w500) { [ weak self ] data in
+                guard
+                    let self = self,
+                    let fetchImage = self.fetchImageHandler
+                else { return }
+                fetchImage(cinema.posterPath, data)
+            }
+            return Cinema(
+                title: cinema.title,
+                imagePath: cinema.posterPath,
+                modelOverview: cinema.overview,
+                modelVoteAverage: cinema.voteAverage,
+                modelVoteCount: cinema.voteCount
+            )
+        })
+
+        return cinemaLibrary
     }
 
     func fetchImage(
@@ -63,10 +83,10 @@ final class CinemaListScreenViewModelImp: CinemaListScreenViewModel {
     ) {
         imageService.fetchImage(posterPath: posterPath, size: size) { result in
             switch result {
-            case let .succes(cinema):
-                completion(cinema)
-            case let .failure(error):
-                print(error.localizedDescription)
+                case let .succes(cinema):
+                    completion(cinema)
+                case let .failure(error):
+                    print(error.localizedDescription)
             }
         }
     }

@@ -3,6 +3,7 @@
 
 import UIKit
 
+/// Внутреннее представление экрана со списком фильмов
 final class CinemaListInternalView: UIView {
     // MARK: - Private types
 
@@ -28,8 +29,6 @@ final class CinemaListInternalView: UIView {
         }
     }
 
-    private var descriptionScreenHelper: [Cinema] = []
-
     var cinemaImageMap: [String: Data] = [:] {
         didSet {
             DispatchQueue.main.async {
@@ -38,7 +37,11 @@ final class CinemaListInternalView: UIView {
         }
     }
 
-    private var tapActionHandler: ((Cinema) -> ())?
+    // MARK: - Private properties
+
+    private var tapActionHandler: ((Cinema, Data) -> ())?
+    private var tapOnButtonHandler: ((TypeOfCinemaRequset) -> ())?
+    private var descriptionScreenHelper: [Cinema] = []
 
     // MARK: - Init
 
@@ -55,8 +58,12 @@ final class CinemaListInternalView: UIView {
 
     // MARK: - Public methods
 
-    func configure(tapAction: @escaping (Cinema) -> ()) {
+    func configure(
+        tapAction: @escaping (Cinema, Data) -> (),
+        tapOnButtonAction: @escaping ((TypeOfCinemaRequset) -> ())
+    ) {
         tapActionHandler = tapAction
+        tapOnButtonHandler = tapOnButtonAction
     }
 
     override func layoutIfNeeded() {
@@ -155,50 +162,24 @@ final class CinemaListInternalView: UIView {
         showNewCinemaButton.backgroundColor = .systemYellow
         showNewCinemaButton.layer.cornerRadius = 5
         showNewCinemaButton.clipsToBounds = true
+        showNewCinemaButton.addTarget(self, action: #selector(getNewCinemaAction), for: .touchUpInside)
     }
 
     // MARK: - @objc private methods
 
     @objc private func getUpcomingCinemaAction() {
-//        NetworkManager.manager.getCinema(typeOfRequest: .getUpcoming) { result in
-//            switch result {
-//                case let .succes(cinema):
-//                    self.cinemaInfo = cinema as? InfoAboutCinema
-//                case let .failure(cinema):
-//                    print("error: - \(cinema.localizedDescription)")
-//            }
-//            DispatchQueue.main.async {
-//                self.cinemaListTableView.reloadData()
-//            }
-//        }
+        guard let action = tapOnButtonHandler else { return }
+        action(.getUpcoming)
     }
 
     @objc private func getPopularCinemaAction() {
-//        NetworkManager.manager.getCinema(typeOfRequest: .getPopular) { result in
-//            switch result {
-//                case let .succes(cinema):
-//                    self.cinemaInfo = cinema as? InfoAboutPopularCinema
-//                case let .failure(cinema):
-//                    print("error: - \(cinema.localizedDescription)")
-//            }
-//            DispatchQueue.main.async {
-//                self.cinemaListTableView.reloadData()
-//            }
-//        }
+        guard let action = tapOnButtonHandler else { return }
+        action(.getPopular)
     }
 
     @objc private func getNewCinemaAction() {
-//        NetworkManager.manager.getCinema(typeOfRequest: .getNew) { result in
-//            switch result {
-//                case let .succes(cinema):
-//                    self.cinemaInfo = cinema as? InfoAboutCinema
-//                case let .failure(cinema):
-//                    print("error: - \(cinema.localizedDescription)")
-//            }
-//            DispatchQueue.main.async {
-//                self.cinemaListTableView.reloadData()
-//            }
-//        }
+        guard let action = tapOnButtonHandler else { return }
+        action(.getNew)
     }
 }
 

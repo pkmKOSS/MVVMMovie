@@ -5,6 +5,7 @@ import Foundation
 
 /// Прокси сервиса загрузки изображений
 final class ProxyImp: Proxy {
+
     // MARK: - Private properties
 
     private let imageAPIService: ImageAPIService
@@ -20,15 +21,17 @@ final class ProxyImp: Proxy {
         self.cacheService = cacheService
     }
 
-    func fetch(posterPath: String, size: SizeOfImages, complition: @escaping (GetImageResult) -> Void) {
+    // MARK: - Public methods
+
+    func fetch(posterPath: String, size: SizeOfImages, completion: @escaping (GetImageResult) -> Void) {
         guard
             let imageData = cacheService.loadDataFromCache(fileURL: posterPath, cacheDataType: .images)
         else {
             imageAPIService.getImage(posterPath: posterPath, size: .w500) { result in
-                complition(result)
+                completion(result)
             }
             return
         }
-        complition(GetImageResult.succes(cinema: imageData))
+        completion(GetImageResult.succes(cinema: imageData))
     }
 }

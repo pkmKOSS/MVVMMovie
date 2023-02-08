@@ -7,7 +7,7 @@ import Foundation
 final class ImageAPIServiceImp: ImageAPIService {
     // MARK: - Public methods
 
-    func getImage(posterPath: String, size: SizeOfImages, complition: @escaping (GetImageResult) -> Void) {
+    func getImage(posterPath: String, size: SizeOfImages, completion: @escaping (GetImageResult) -> Void) {
         let urlString = "\(StringConstants.imageBaseUrl)\(size.rawValue)\(posterPath)"
         guard let url = URL(string: urlString) else { return }
 
@@ -15,10 +15,10 @@ final class ImageAPIServiceImp: ImageAPIService {
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let data = data {
                 let result = GetImageResult.succes(cinema: data)
-                complition(result)
+                completion(result)
             } else if let error = error {
                 let result = GetImageResult.failure(cinema: error)
-                complition(result)
+                completion(result)
             }
         }.resume()
     }

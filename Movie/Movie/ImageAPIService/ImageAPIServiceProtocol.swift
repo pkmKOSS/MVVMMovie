@@ -9,10 +9,10 @@ protocol ImageAPIService {
     /// - Parameters:
     ///   - posterPath: адрес изображение. Получается как поле Result
     ///   - size: Размер изображения.
-    ///   - complition: Замыкание.
+    ///   - completion: Замыкание.
     func getImage(
         posterPath: String,
         size: SizeOfImages,
-        complition: @escaping (GetImageResult) -> Void
+        completion: @escaping (GetImageResult) -> Void
     )
 }

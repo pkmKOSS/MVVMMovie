@@ -24,11 +24,11 @@ final class Builder: BuilderProtocol {
         return viewController
     }
 
-    func buildCinemaDescriptionScreen(cinema: Cinema) -> UIViewController {
+    func buildCinemaDescriptionScreen(cinema: Cinema, imageData: Data) -> UIViewController {
         let proxy = ProxyImp(imageAPIService: imageAPIService, cacheService: cacheService)
         let imageService = ImageServiceImp(proxy: proxy)
         let viewModel = CinemaDescriptionViewModelImp(networkService: networkManager, imageService: imageService)
-        let viewController = CinemaDescriptionViewController(cinema: cinema)
+        let viewController = CinemaDescriptionViewController(cinema: cinema, imageData: imageData)
         viewController.viewModel = viewModel
         return viewController
     }

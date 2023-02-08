@@ -30,16 +30,16 @@ final class ApplicationCoordinator: BaseCoordinator {
 
     private func showCinemaListScreen() {
         guard let controller = builder.buildCinemaListScreen() as? CinemaListViewController else { return }
-        controller.toDescriptionScreen = { [weak self] cinema in
+        controller.toDescriptionScreen = { [weak self] cinema, data in
             guard let self = self else { return }
-            self.showCinemaDescriptionScreen(cinema: cinema)
+            self.showCinemaDescriptionScreen(cinema: cinema, imageData: data)
         }
         navigationController?.pushViewController(controller, animated: true)
         setAsRoot(navigationController ?? UINavigationController())
     }
 
-    private func showCinemaDescriptionScreen(cinema: Cinema) {
-        let detailController = builder.buildCinemaDescriptionScreen(cinema: cinema)
+    private func showCinemaDescriptionScreen(cinema: Cinema, imageData: Data) {
+        let detailController = builder.buildCinemaDescriptionScreen(cinema: cinema, imageData: imageData)
         navigationController?.pushViewController(detailController, animated: true)
     }
 }

@@ -7,7 +7,7 @@ import Foundation
 final class ImageServiceImp: ImageService {
     // MARK: - Private properties
 
-    let proxy: Proxy
+    private let proxy: Proxy
 
     // MARK: - Init
 
@@ -17,9 +17,9 @@ final class ImageServiceImp: ImageService {
 
     // MARK: - Public methods
 
-    func fetchImage(posterPath: String, size: SizeOfImages, complition: @escaping (GetImageResult) -> Void) {
+    func fetchImage(posterPath: String, size: SizeOfImages, completion: @escaping (GetImageResult) -> Void) {
         proxy.fetch(posterPath: posterPath, size: size) { result in
-            complition(result)
+            completion(result)
         }
     }
 }

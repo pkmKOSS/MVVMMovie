@@ -28,6 +28,7 @@ final class CinemaDescriptionViewController: UIViewController {
     // MARK: - Private properties
 
     private let cinema: Cinema
+    private let imageData: Data
     private let cellTypes: [CellTypes] = [.posterCell, .buttonsCell, .overviewCell, .ratingCell]
 
     // MARK: - Private visual components
@@ -43,8 +44,12 @@ final class CinemaDescriptionViewController: UIViewController {
 
     // MARK: Init
 
-    init(cinema: Cinema) {
+    init(
+        cinema: Cinema,
+        imageData: Data
+    ) {
         self.cinema = cinema
+        self.imageData = imageData
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -115,7 +120,7 @@ extension CinemaDescriptionViewController: UITableViewDataSource, UITableViewDel
                     for: indexPath
                 ) as? PosterTableViewCell
             else { return UITableViewCell() }
-            cell.configureCell()
+            cell.configureCell(imageData: imageData)
             return cell
         case .buttonsCell:
             guard let

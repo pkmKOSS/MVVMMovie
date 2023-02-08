@@ -5,37 +5,42 @@ import Foundation
 
 /// Менеджер для работы с сетью.
 final class NetworkManager {
-    init() {}
+
+    // MARK: - Private properties
 
     private let shared = URLSession.shared
     private let decoder = JSONDecoder()
+
+    // MARK: - Init
+
+    init() {}
 
     /// Запросить список кинофильмов.
     /// - Parameters:
     ///   - typeOfRequest: Тип запроса в зависимости от конкретных характеристик кинофильмов.
     ///   - handler: Возвращает массив кинофильмов или ошибку.
-    func getCinema(typeOfRequest: TypeOfCinemaRequset, complition: @escaping (GetPostResult) -> Void) {
+    func getCinema(typeOfRequest: TypeOfCinemaRequset, completion: @escaping (GetPostResult) -> Void) {
         switch typeOfRequest {
         case .getUpcoming:
             sendRequest(
                 urlString: URLStrings.getUpcoming.rawValue,
                 model: InfoAboutCinema.self
             ) { result in
-                complition(result)
+                completion(result)
             }
         case .getPopular:
             sendRequest(
                 urlString: URLStrings.getPopular.rawValue,
                 model: InfoAboutCinema.self
             ) { result in
-                complition(result)
+                completion(result)
             }
         case .getNew:
             sendRequest(
                 urlString: URLStrings.getNew.rawValue,
                 model: InfoAboutCinema.self
             ) { result in
-                complition(result)
+                completion(result)
             }
         }
     }
@@ -44,11 +49,11 @@ final class NetworkManager {
     /// - Parameters:
     ///   - posterPath: адрес изображение. Получается как поле Result
     ///   - size: Размер изображения.
-    ///   - complition: Замыкание.
+    ///   - completion: Замыкание.
     func getImage(
         posterPath: String,
         size: SizeOfImages,
-        complition: @escaping (GetImageResult) -> Void
+        completion: @escaping (GetImageResult) -> Void
     ) {
         let urlString = "\(StringConstants.imageBaseUrl)\(size.rawValue)\(posterPath)"
         guard let url = URL(string: urlString) else { return }
@@ -57,10 +62,10 @@ final class NetworkManager {
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let data = data {
                 let result = GetImageResult.succes(cinema: data)
-                complition(result)
+                completion(result)
             } else if let error = error {
                 let result = GetImageResult.failure(cinema: error)
-                complition(result)
+                completion(result)
             }
         }.resume()
     }
@@ -68,19 +73,22 @@ final class NetworkManager {
     private func sendRequest<T: Codable>(
         urlString: String,
         model: T.Type,
-        complition: @escaping (GetPostResult) -> Void
+        completion: @escaping (GetPostResult) -> Void
     ) {
         guard let url = URL(string: urlString) else { return }
 
         let request = URLRequest(url: url)
-        URLSession.shared.dataTask(with: request) { data, _, error in
-            guard let cinematics = try? self.decoder.decode(model.self, from: data ?? Data()) else { return }
+        URLSession.shared.dataTask(with: request) { [ weak self ] data, _, error in
+            guard
+                let self = self,
+                let cinematics = try? self.decoder.decode(model.self, from: data ?? Data())
+            else { return }
             let result = GetPostResult.succes(cinema: cinematics)
 
-            complition(result)
+            completion(result)
 
             if let error = error {
-                complition(GetPostResult.failure(cinema: error))
+                completion(GetPostResult.failure(cinema: error))
             }
         }.resume()
     }

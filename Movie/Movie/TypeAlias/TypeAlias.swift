@@ -3,4 +3,4 @@
 
 import Foundation
 
-typealias TapAction = (Cinema) -> ()
+typealias TapAction = (Cinema, Data) -> ()
