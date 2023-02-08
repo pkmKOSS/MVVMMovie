@@ -4,7 +4,7 @@
 import Foundation
 
 // Сервис для получения фото
-protocol ImageAPIService {
+protocol ImageAPIServiceProtocol {
     /// Получить постер фильма.
     /// - Parameters:
     ///   - posterPath: адрес изображение. Получается как поле Result

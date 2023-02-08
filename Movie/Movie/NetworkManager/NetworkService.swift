@@ -1,11 +1,10 @@
-// NetworkManager.swift
+// NetworkService.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
 
 /// Менеджер для работы с сетью.
-final class NetworkManager {
-
+final class NetworkService: NetworkServiceProtocol {
     // MARK: - Private properties
 
     private let shared = URLSession.shared
@@ -78,7 +77,7 @@ final class NetworkManager {
         guard let url = URL(string: urlString) else { return }
 
         let request = URLRequest(url: url)
-        URLSession.shared.dataTask(with: request) { [ weak self ] data, _, error in
+        URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
             guard
                 let self = self,
                 let cinematics = try? self.decoder.decode(model.self, from: data ?? Data())

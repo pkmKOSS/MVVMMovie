@@ -4,4 +4,4 @@
 import Foundation
 
 /// Протокол вью модели экрана с подробностями фильма.
-protocol CinemaDescriptionViewModel {}
+protocol CinemaDescriptionViewModelProtocol {}

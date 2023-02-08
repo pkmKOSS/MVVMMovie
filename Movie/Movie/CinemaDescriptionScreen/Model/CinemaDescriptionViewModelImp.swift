@@ -4,17 +4,17 @@
 import Foundation
 
 /// Вью модель экрана с подробностями о фильме
-final class CinemaDescriptionViewModelImp: CinemaDescriptionViewModel {
+final class CinemaDescriptionViewModelImp: CinemaDescriptionViewModelProtocol {
     // MARK: - Public properties
 
-    let networkService: NetworkManager
-    let imageService: ImageService
+    let networkService: NetworkService
+    let imageService: ImageServiceProtocol
 
     // MARK: - Init
 
     init(
-        networkService: NetworkManager,
-        imageService: ImageService
+        networkService: NetworkService,
+        imageService: ImageServiceProtocol
     ) {
         self.networkService = networkService
         self.imageService = imageService

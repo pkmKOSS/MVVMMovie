@@ -3,7 +3,7 @@
 
 import Foundation
 
-/// Информация для экрана со списком филмьов.
+/// Информация для экрана со списком фильмов.
 enum ViewData {
     case initial
     case loading
@@ -24,7 +24,7 @@ struct Cinema {
     let modelVoteCount: Int
 }
 
-/// Информация для экрана со списком филмьов.
+/// Информация для экрана со списком фильмов.
 enum ViewImageData {
     case initial
     case loading

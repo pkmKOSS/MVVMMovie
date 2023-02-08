@@ -32,6 +32,7 @@ final class CinemaListViewController: UIViewController {
         configureFetchUpcomingCinemaHandler()
         configureFetchNewCinemaHandler()
         configureInternalView()
+        configureShowAlertHandle()
         fetchCinema(typeOfCinema: .getPopular)
     }
 
@@ -73,6 +74,13 @@ final class CinemaListViewController: UIViewController {
                 return
             }
             self.internalView.viewData = viewData
+        }
+    }
+
+    private func configureShowAlertHandle() {
+        viewModel.showErrorAlertHandler = { [weak self] localizedError in
+            let alert = UIAlertController(title: nil, message: "\(localizedError)", preferredStyle: .alert)
+            self?.navigationController?.present(alert, animated: true)
         }
     }
 

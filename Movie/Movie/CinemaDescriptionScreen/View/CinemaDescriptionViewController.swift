@@ -23,7 +23,7 @@ final class CinemaDescriptionViewController: UIViewController {
 
     // MARK: - Public properties
 
-    var viewModel: CinemaDescriptionViewModel!
+    var viewModel: CinemaDescriptionViewModelProtocol!
 
     // MARK: - Private properties
 

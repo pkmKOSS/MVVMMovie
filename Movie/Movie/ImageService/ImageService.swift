@@ -4,7 +4,7 @@
 import Foundation
 
 /// Протокол сервис загрузки изображений
-protocol ImageService {
+protocol ImageServiceProtocol {
     /// Метод получения изображения
     /// - Parameters:
     ///   - posterPath: Адрес постера

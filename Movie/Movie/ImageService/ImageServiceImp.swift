@@ -4,7 +4,7 @@
 import Foundation
 
 /// Сервис работы с изображениями
-final class ImageServiceImp: ImageService {
+final class ImageService: ImageServiceProtocol {
     // MARK: - Private properties
 
     private let proxy: Proxy

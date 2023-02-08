@@ -5,16 +5,15 @@ import Foundation
 
 /// Прокси сервиса загрузки изображений
 final class ProxyImp: Proxy {
-
     // MARK: - Private properties
 
-    private let imageAPIService: ImageAPIService
+    private let imageAPIService: ImageAPIServiceProtocol
     private let cacheService: CacheServiceProtocol
 
     // MARK: - init
 
     init(
-        imageAPIService: ImageAPIService,
+        imageAPIService: ImageAPIServiceProtocol,
         cacheService: CacheServiceProtocol
     ) {
         self.imageAPIService = imageAPIService

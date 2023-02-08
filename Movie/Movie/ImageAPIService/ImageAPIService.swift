@@ -1,10 +1,10 @@
-// ImageAPIServiceImp.swift
+// ImageAPIService.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
 
 /// Сервис получения фото
-final class ImageAPIServiceImp: ImageAPIService {
+final class ImageAPIService: ImageAPIServiceProtocol {
     // MARK: - Public methods
 
     func getImage(posterPath: String, size: SizeOfImages, completion: @escaping (GetImageResult) -> Void) {
