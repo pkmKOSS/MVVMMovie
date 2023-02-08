@@ -13,7 +13,7 @@ final class CinemaListTableViewCell: UITableViewCell {
     private var ratingLabel = UILabel()
     private var countOfVoteLabel = UILabel()
     private var actionHandler: TapAction?
-    private var cinemaDescriprion: DescriptionScreenHelper?
+    private var cinemaDescription: Cinema?
 
     // MARK: Init
 
@@ -29,17 +29,20 @@ final class CinemaListTableViewCell: UITableViewCell {
     // MARK: - Public methods
 
     func configureCell(
-        description: DescriptionScreenHelper,
-        handler: TapAction?
+        cinema: Cinema?,
+        handler: TapAction? = nil,
+        imageData: Data? = nil
     ) {
         actionHandler = handler
-        cinemaDescriprion = description
-        guard let cinemaHelper = cinemaDescriprion else { return }
-        configureCinemaAvatarImageView(imageData: cinemaHelper.imageData)
-        configureCinemaNameLabel(title: cinemaHelper.title)
-        configureCinemaDescriptionLabel(modelOverview: cinemaHelper.modelOverview)
-        configureRatingLabel(modelVoteAverage: cinemaHelper.modelVoteAverage)
-        configureVoteLabel(modelVoteCount: cinemaHelper.modelVoteCount)
+        cinemaDescription = cinema
+        guard
+            let cinema = cinema
+        else { return }
+        configureCinemaAvatarImageView(imageData: imageData ?? Data())
+        configureCinemaNameLabel(title: cinema.title)
+        configureCinemaDescriptionLabel(modelOverview: cinema.modelOverview)
+        configureRatingLabel(modelVoteAverage: cinema.modelVoteAverage)
+        configureVoteLabel(modelVoteCount: cinema.modelVoteCount)
         addTapGestoreRecognizer()
         selectionStyle = .none
     }
@@ -151,10 +154,10 @@ final class CinemaListTableViewCell: UITableViewCell {
     @objc private func gestoreAction() {
         guard
             let tapAction = actionHandler,
-            let helper = cinemaDescriprion
+            let cinemaDescription = cinemaDescription
         else {
             return
         }
-        tapAction(helper)
+        tapAction(cinemaDescription)
     }
 }

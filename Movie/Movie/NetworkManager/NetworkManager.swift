@@ -5,9 +5,7 @@ import Foundation
 
 /// Менеджер для работы с сетью.
 final class NetworkManager {
-    static let manager = NetworkManager()
-
-    private init() {}
+    init() {}
 
     private let shared = URLSession.shared
     private let decoder = JSONDecoder()
@@ -28,7 +26,7 @@ final class NetworkManager {
         case .getPopular:
             sendRequest(
                 urlString: URLStrings.getPopular.rawValue,
-                model: InfoAboutPopularCinema.self
+                model: InfoAboutCinema.self
             ) { result in
                 complition(result)
             }
@@ -76,7 +74,7 @@ final class NetworkManager {
 
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { data, _, error in
-            guard let cinematics = try? JSONDecoder().decode(model.self, from: data ?? Data()) else { return }
+            guard let cinematics = try? self.decoder.decode(model.self, from: data ?? Data()) else { return }
             let result = GetPostResult.succes(cinema: cinematics)
 
             complition(result)

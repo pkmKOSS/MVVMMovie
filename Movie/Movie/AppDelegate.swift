@@ -7,16 +7,18 @@ import UIKit
 // Сгенерированный AppDelegate
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    var navController = UIViewController()
+    var coordinator: ApplicationCoordinator?
 
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
-        let viewController = CinemaListViewController()
-        navController = UINavigationController(rootViewController: viewController)
+        let navController = UINavigationController()
+        let builder = Builder()
+        coordinator = ApplicationCoordinator(navigationController: navController, builder: builder)
         window?.rootViewController = navController
         window?.makeKeyAndVisible()
+        coordinator?.start()
         return true
     }
 }

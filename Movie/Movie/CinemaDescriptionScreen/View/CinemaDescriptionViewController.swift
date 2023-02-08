@@ -21,9 +21,13 @@ final class CinemaDescriptionViewController: UIViewController {
         case ratingCellIdentifier = "RatingTableViewCell"
     }
 
+    // MARK: - Public properties
+
+    var viewModel: CinemaDescriptionViewModel!
+
     // MARK: - Private properties
 
-    private let descriptionHelper: DescriptionScreenHelper
+    private let cinema: Cinema
     private let cellTypes: [CellTypes] = [.posterCell, .buttonsCell, .overviewCell, .ratingCell]
 
     // MARK: - Private visual components
@@ -39,8 +43,8 @@ final class CinemaDescriptionViewController: UIViewController {
 
     // MARK: Init
 
-    init(helper: DescriptionScreenHelper) {
-        descriptionHelper = helper
+    init(cinema: Cinema) {
+        self.cinema = cinema
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -111,7 +115,7 @@ extension CinemaDescriptionViewController: UITableViewDataSource, UITableViewDel
                     for: indexPath
                 ) as? PosterTableViewCell
             else { return UITableViewCell() }
-            cell.configureCell(imageData: descriptionHelper.imageData)
+            cell.configureCell()
             return cell
         case .buttonsCell:
             guard let
@@ -129,7 +133,7 @@ extension CinemaDescriptionViewController: UITableViewDataSource, UITableViewDel
                     for: indexPath
                 ) as? OverviewTableViewCell
             else { return UITableViewCell() }
-            cell.configureCell(overViewText: descriptionHelper.modelOverview)
+            cell.configureCell(overViewText: cinema.modelOverview)
             return cell
         case .ratingCell:
             guard let
@@ -139,8 +143,8 @@ extension CinemaDescriptionViewController: UITableViewDataSource, UITableViewDel
                 ) as? RatingTableViewCell
             else { return UITableViewCell() }
             cell.configureCell(
-                countOfVote: descriptionHelper.modelVoteCount,
-                avarageVote: descriptionHelper.modelVoteAverage
+                countOfVote: cinema.modelVoteCount,
+                avarageVote: cinema.modelVoteAverage
             )
             return cell
         default:
