@@ -3,49 +3,42 @@
 
 import Foundation
 
-/// Сведения о грядущих новинках.
-struct InfoAboutCinema: Codable, CinemaInfoProtocol {
-    let dates: Dates
-    let page: Int
-    var results: [Result]
-    let totalPages, totalResults: Int
-
-    enum CodingKeys: String, CodingKey {
-        case dates, page, results
-        case totalPages = "total_pages"
-        case totalResults = "total_results"
-    }
-}
-
-/// Сведения о популярных кинофильмах.
-struct InfoAboutPopularCinema: Codable, CinemaInfoProtocol {
-    let page: Int
-    var results: [Result]
-    let totalPages, totalResults: Int
-
-    enum CodingKeys: String, CodingKey {
-        case page, results
-        case totalPages = "total_pages"
-        case totalResults = "total_results"
-    }
-}
-
 /// Даты выхода грядущего релиза.
 struct Dates: Codable {
     let maximum, minimum: String
 }
 
+/// Сведения о грядущих новинках.
+struct InfoAboutCinema: Codable, CinemaInfoProtocol {
+    /// Массив с результатами запроса (фильмами)
+    var results: [Result]
+
+    enum CodingKeys: String, CodingKey {
+        case results
+    }
+}
+
 /// Сведения о конкретном фильме.
 struct Result: Codable {
+    /// Любительский ли фильм
     let adult: Bool
+    /// Адрес фонового изображения
     let backdropPath: String
+    /// ID жанра
     let genreIDS: [Int]
+    /// ID фильма
     let id: Int
+    /// Язык оригинала, название на оригинальном языке, описание
     let originalLanguage, originalTitle, overview: String
+    /// Количество просмотров
     let popularity: Double
+    /// Адрес постера, дата релиза, название
     let posterPath, releaseDate, title: String
+    /// Трейлер
     let video: Bool
+    /// Средняя оценка
     let voteAverage: Double
+    /// Количество голосов
     let voteCount: Int
 
     enum CodingKeys: String, CodingKey {
