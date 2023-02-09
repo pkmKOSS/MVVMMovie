@@ -19,4 +19,8 @@ protocol NetworkServiceProtocol {
         size: SizeOfImages,
         completion: @escaping (GetImageResult) -> Void
     )
+
+    /// Метод устанавливает апи кей
+    /// - Parameter key: ключ
+    func setKeyChainApi(key: String)
 }

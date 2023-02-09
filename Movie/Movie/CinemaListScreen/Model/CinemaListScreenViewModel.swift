@@ -1,4 +1,4 @@
-// CinemaListScreenViewModelImp.swift
+// CinemaListScreenViewModel.swift
 // Copyright © RoadMap. All rights reserved.
 
 import Foundation
@@ -12,47 +12,58 @@ final class CinemaListScreenViewModel: CinemaListScreenViewModelProtocol {
     var onUpcomingCinemaTapHandler: ((ViewData) -> ())?
     var fetchImageHandler: ((String, Data) -> ())?
     var showErrorAlertHandler: ((String) -> Void)?
+    var showApiKeyAlertHandler: (() -> ())?
 
     // MARK: - Private properties
 
-    private let networkManager: NetworkServiceProtocol
+    private let networkService: NetworkServiceProtocol
     private let imageService: ImageServiceProtocol
+    private let keychainService: KeychainServiceProtocol
+    private let coreDataService: CoreDataServiceProtocol
 
     // MARK: - Init
 
     init(
-        networkManager: NetworkServiceProtocol,
-        imageService: ImageServiceProtocol
+        networkService: NetworkServiceProtocol,
+        imageService: ImageServiceProtocol,
+        keychainService: KeychainServiceProtocol,
+        coreDataService: CoreDataServiceProtocol
     ) {
-        self.networkManager = networkManager
+        self.networkService = networkService
         self.imageService = imageService
+        self.keychainService = keychainService
+        self.coreDataService = coreDataService
     }
 
     // MARK: - Public methods
 
     func fetchCinema(typeOfCinema: TypeOfCinemaRequset) {
+        guard setKeychain() else {
+            return
+        }
         guard
             let getPopular = onPopulareCinemaTapHandler,
             let getNew = onNewCinemaTapHandler,
             let getUpcoming = onUpcomingCinemaTapHandler,
             let showError = showErrorAlertHandler
         else { return }
-        networkManager.getCinema(typeOfRequest: typeOfCinema) { [weak self] result in
+        networkService.getCinema(typeOfRequest: typeOfCinema) { [weak self] result in
             guard let self = self else { return }
             switch result {
-                case let .succes(cinemaResponse):
-                    if let cinemaLibrary = self.makeCinemaLibrary(cinemaResponse: cinemaResponse) {
-                        switch typeOfCinema {
-                            case .getUpcoming:
-                                getUpcoming(ViewData.success(cinemaLibrary))
-                            case .getPopular:
-                                getPopular(ViewData.success(cinemaLibrary))
-                            case .getNew:
-                                getNew(ViewData.success(cinemaLibrary))
-                        }
+            case let .succes(cinemaResponse):
+                if let cinemaLibrary = self.makeCinemaLibrary(cinemaResponse: cinemaResponse) {
+                    switch typeOfCinema {
+                    case .getUpcoming:
+                        getUpcoming(ViewData.success(cinemaLibrary))
+                    case .getPopular:
+                        getPopular(ViewData.success(cinemaLibrary))
+                    case .getNew:
+                        getNew(ViewData.success(cinemaLibrary))
                     }
-                case let .failure(error):
-                    showError(error.localizedDescription)
+                }
+            case let .failure(error):
+                showError(error.localizedDescription)
+                getUpcoming(ViewData.success(self.coreDataService.loadData()))
             }
         }
     }
@@ -74,7 +85,7 @@ final class CinemaListScreenViewModel: CinemaListScreenViewModelProtocol {
                 modelVoteCount: cinema.voteCount
             )
         }
-
+        coreDataService.saveData(cinemaLibrary ?? [])
         return cinemaLibrary
     }
 
@@ -88,11 +99,35 @@ final class CinemaListScreenViewModel: CinemaListScreenViewModelProtocol {
         else { return }
         imageService.fetchImage(posterPath: posterPath, size: size) { result in
             switch result {
-                case let .succes(cinema):
-                    completion(cinema)
-                case let .failure(error):
-                    showError(error.localizedDescription)
+            case let .succes(cinema):
+                completion(cinema)
+            case let .failure(error):
+                showError(error.localizedDescription)
             }
         }
+    }
+
+    func setKeychain() -> Bool {
+//        keychainService.deleteAPIKey()
+        let key = keychainService.decodeAPIKey()
+        guard let apiAlertHandler = showApiKeyAlertHandler else { return false }
+        guard
+            !keychainService.decodeAPIKey().isEmpty
+        else {
+            apiAlertHandler()
+            return false
+        }
+        networkService.setKeyChainApi(key: key)
+        return true
+    }
+
+    func setKeyChainManual(key: String) {
+        networkService.setKeyChainApi(key: key)
+        keychainService.saveAPI(key: key)
+        fetchCinema(typeOfCinema: .getPopular)
+    }
+
+    func cleanUserApiKey() {
+        keychainService.deleteAPIKey()
     }
 }
