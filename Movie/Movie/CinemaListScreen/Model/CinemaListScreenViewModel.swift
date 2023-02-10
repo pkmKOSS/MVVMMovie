@@ -7,12 +7,13 @@ import Foundation
 final class CinemaListScreenViewModel: CinemaListScreenViewModelProtocol {
     // MARK: - Public propeties
 
-    var onNewCinemaTapHandler: ((ViewData) -> ())?
-    var onPopulareCinemaTapHandler: ((ViewData) -> ())?
-    var onUpcomingCinemaTapHandler: ((ViewData) -> ())?
-    var fetchImageHandler: ((String, Data) -> ())?
-    var showErrorAlertHandler: ((String) -> Void)?
+    var onNewCinemaTapHandler: NewCinemaTapHandler?
+    var onPopulareCinemaTapHandler: PopulareCinemaTapHandler?
+    var onUpcomingCinemaTapHandler: UpcomingCinemaHandler?
+    var fetchImageHandler: FetchImageHandler?
+    var showErrorAlertHandler: ShowErrorAlertHandler?
     var showApiKeyAlertHandler: (() -> ())?
+    
 
     // MARK: - Private properties
 
@@ -38,10 +39,8 @@ final class CinemaListScreenViewModel: CinemaListScreenViewModelProtocol {
     // MARK: - Public methods
 
     func fetchCinema(typeOfCinema: TypeOfCinemaRequset) {
-        guard setKeychain() else {
-            return
-        }
         guard
+            setKeychain(),
             let getPopular = onPopulareCinemaTapHandler,
             let getNew = onNewCinemaTapHandler,
             let getUpcoming = onUpcomingCinemaTapHandler,
@@ -108,7 +107,6 @@ final class CinemaListScreenViewModel: CinemaListScreenViewModelProtocol {
     }
 
     func setKeychain() -> Bool {
-//        keychainService.deleteAPIKey()
         let key = keychainService.decodeAPIKey()
         guard let apiAlertHandler = showApiKeyAlertHandler else { return false }
         guard

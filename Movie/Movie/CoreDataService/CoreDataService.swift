@@ -1,12 +1,11 @@
 // CoreDataService.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Alexandr Grigorenko. All rights reserved.
 
 import CoreData
 import Foundation
 
 /// Сервиc работы с CoreData
 final class CoreDataService: CoreDataServiceProtocol {
-
     // MARK: - Private constants
 
     private enum Constants {

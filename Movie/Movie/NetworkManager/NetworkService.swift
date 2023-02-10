@@ -1,5 +1,5 @@
 // NetworkService.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Alexandr Grigorenko. All rights reserved.
 
 import Foundation
 
@@ -10,7 +10,6 @@ final class NetworkService: NetworkServiceProtocol {
     private let shared = URLSession.shared
     private let decoder = JSONDecoder()
     private var apiKey: String?
-    private var apiKeyDefault = "c7f7d1dc5a6aa58fd2f3602748ad9c64"
 
     // MARK: - Init
 
