@@ -1,5 +1,5 @@
 // Builder.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Alexandr Grigorenko. All rights reserved.
 
 import UIKit
 
@@ -10,13 +10,20 @@ final class Builder: BuilderProtocol {
     private let networkService = NetworkService()
     private let imageAPIService = ImageAPIService()
     private let cacheService = CacheService()
+    private let keychainService = KeychainService()
+    private let coreDataService = CoreDataService()
 
     // MARK: - Public methods
 
     func buildCinemaListScreen() -> UIViewController {
         let proxy = ProxyImp(imageAPIService: imageAPIService, cacheService: cacheService)
         let imageService = ImageService(proxy: proxy)
-        let viewModel = CinemaListScreenViewModel(networkManager: networkService, imageService: imageService)
+        let viewModel = CinemaListScreenViewModel(
+            networkService: networkService,
+            imageService: imageService,
+            keychainService: keychainService,
+            coreDataService: coreDataService
+        )
         let internalView = CinemaListInternalView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         let viewController = CinemaListViewController()
         viewController.internalView = internalView

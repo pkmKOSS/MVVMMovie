@@ -1,5 +1,5 @@
 // CinemaListViewController.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Alexandr Grigorenko. All rights reserved.
 
 import UIKit
 
@@ -33,6 +33,7 @@ final class CinemaListViewController: UIViewController {
         configureFetchNewCinemaHandler()
         configureInternalView()
         configureShowAlertHandle()
+        configureSetApiKeyAlert()
         fetchCinema(typeOfCinema: .getPopular)
     }
 
@@ -81,6 +82,20 @@ final class CinemaListViewController: UIViewController {
         viewModel.showErrorAlertHandler = { [weak self] localizedError in
             let alert = UIAlertController(title: nil, message: "\(localizedError)", preferredStyle: .alert)
             self?.navigationController?.present(alert, animated: true)
+        }
+    }
+
+    private func configureSetApiKeyAlert() {
+        viewModel.showApiKeyAlertHandler = { [weak self] in
+            guard let self = self else { return }
+            let alert = UIAlertController(title: nil, message: "Введите ключ", preferredStyle: .alert)
+            alert.addTextField()
+            let action = UIAlertAction(title: "Ok", style: .default) { _ in
+                var alertText = alert.textFields?.first?.text ?? ""
+                self.viewModel.setKeyChainManual(key: alertText)
+            }
+            alert.addAction(action)
+            self.navigationController?.present(alert, animated: true)
         }
     }
 

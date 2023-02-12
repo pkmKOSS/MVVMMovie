@@ -1,5 +1,5 @@
 // NetworkService.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Alexandr Grigorenko. All rights reserved.
 
 import Foundation
 
@@ -9,10 +9,15 @@ final class NetworkService: NetworkServiceProtocol {
 
     private let shared = URLSession.shared
     private let decoder = JSONDecoder()
+    private var apiKey: String?
 
     // MARK: - Init
 
     init() {}
+
+    func setKeyChainApi(key: String) {
+        apiKey = key
+    }
 
     /// Запросить список кинофильмов.
     /// - Parameters:
@@ -22,21 +27,21 @@ final class NetworkService: NetworkServiceProtocol {
         switch typeOfRequest {
         case .getUpcoming:
             sendRequest(
-                urlString: URLStrings.getUpcoming.rawValue,
+                urlString: "\(URLStrings.getUpcoming.rawValue)\(apiKey ?? "")\(PageString.getUpcoming.rawValue)",
                 model: InfoAboutCinema.self
             ) { result in
                 completion(result)
             }
         case .getPopular:
             sendRequest(
-                urlString: URLStrings.getPopular.rawValue,
+                urlString: "\(URLStrings.getPopular.rawValue)\(apiKey ?? "")\(PageString.getPopular.rawValue)",
                 model: InfoAboutCinema.self
             ) { result in
                 completion(result)
             }
         case .getNew:
             sendRequest(
-                urlString: URLStrings.getNew.rawValue,
+                urlString: "\(URLStrings.getNew.rawValue)\(apiKey ?? "")\(PageString.getNew.rawValue)",
                 model: InfoAboutCinema.self
             ) { result in
                 completion(result)
@@ -124,8 +129,15 @@ enum SizeOfImages: String {
 /// Ссылки для запросов.
 enum URLStrings: String {
     case getUpcoming =
-        "https://api.themoviedb.org/3/movie/upcoming?api_key=c7f7d1dc5a6aa58fd2f3602748ad9c64&language=ru&page-1"
+        "https://api.themoviedb.org/3/movie/upcoming?api_key="
     case getPopular =
-        "https://api.themoviedb.org/3/movie/popular?api_key=c7f7d1dc5a6aa58fd2f3602748ad9c64&language=ru&page-2"
-    case getNew = "https://api.themoviedb.org/3/movie/latest?c7f7d1dc5a6aa58fd2f3602748ad9c64&language=ru&page-3"
+        "https://api.themoviedb.org/3/movie/popular?api_key="
+    case getNew = "https://api.themoviedb.org/3/movie/latest?api_key="
+}
+
+/// Часть ссылки со страницей и языком
+enum PageString: String {
+    case getUpcoming = "&language=ru&page-1"
+    case getPopular = "&language=ru&page-2"
+    case getNew = "&language=ru&page-3"
 }

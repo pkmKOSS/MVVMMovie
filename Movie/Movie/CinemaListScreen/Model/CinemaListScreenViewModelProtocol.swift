@@ -1,5 +1,5 @@
-// CinemaListScreenViewModel.swift
-// Copyright © RoadMap. All rights reserved.
+// CinemaListScreenViewModelProtocol.swift
+// Copyright © Alexandr Grigorenko. All rights reserved.
 
 import Foundation
 
@@ -9,5 +9,10 @@ protocol CinemaListScreenViewModelProtocol {
     var onPopulareCinemaTapHandler: ((ViewData) -> ())? { get set }
     var onUpcomingCinemaTapHandler: ((ViewData) -> ())? { get set }
     var fetchImageHandler: ((String, Data) -> ())? { get set }
+    var showErrorAlertHandler: ((String) -> Void)? { get set }
+    var showApiKeyAlertHandler: (() -> ())? { get set }
+
+    func setKeychain() -> Bool
+    func cleanUserApiKey()
     func fetchCinema(typeOfCinema: TypeOfCinemaRequset)
 }

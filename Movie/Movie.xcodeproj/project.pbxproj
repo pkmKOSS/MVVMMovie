@@ -25,6 +25,9 @@
 		6B434B2929930F320001041F /* BuilderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B434B2829930F320001041F /* BuilderProtocol.swift */; };
 		6B434B2C299315D60001041F /* CacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B434B2B299315D60001041F /* CacheService.swift */; };
 		6B434B2E299316040001041F /* CacheServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B434B2D299316040001041F /* CacheServiceProtocol.swift */; };
+		6B5DE6932995909900B102DD /* CoreDataServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5DE6922995909900B102DD /* CoreDataServiceProtocol.swift */; };
+		6B5DE695299590A000B102DD /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B5DE694299590A000B102DD /* CoreDataService.swift */; };
+		6B5DE6A42995950300B102DD /* CinemaLibrary.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6B5DE6A22995950200B102DD /* CinemaLibrary.xcdatamodeld */; };
 		6B99979E29920ED20086777C /* ViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B99979D29920ED20086777C /* ViewData.swift */; };
 		6B9997A029920EEF0086777C /* CinemaListInternalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B99979F29920EEF0086777C /* CinemaListInternalView.swift */; };
 		6B9997A22992114A0086777C /* CinemaListScreenViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9997A12992114A0086777C /* CinemaListScreenViewModelProtocol.swift */; };
@@ -36,6 +39,8 @@
 		6BB0AEB6290847E400F4B2B9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BB0AEB4290847E400F4B2B9 /* Main.storyboard */; };
 		6BB0AEB8290847E600F4B2B9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BB0AEB7290847E600F4B2B9 /* Assets.xcassets */; };
 		6BB0AEBB290847E600F4B2B9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6BB0AEB9290847E600F4B2B9 /* LaunchScreen.storyboard */; };
+		6BD6C27B299422B0004D5461 /* KeychainServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6C27A299422B0004D5461 /* KeychainServiceProtocol.swift */; };
+		6BD6C27D299424BF004D5461 /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD6C27C299424BF004D5461 /* KeychainService.swift */; };
 		6BDB75F6299319DC00526945 /* CinemaDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDB75F5299319DC00526945 /* CinemaDescriptionViewModel.swift */; };
 		6BDB75F8299319F500526945 /* CinemaDescriptionViewModelImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BDB75F7299319F500526945 /* CinemaDescriptionViewModelImp.swift */; };
 		6BF3413429098C40001448A2 /* CinemaDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF3413329098C40001448A2 /* CinemaDescriptionViewController.swift */; };
@@ -65,6 +70,9 @@
 		6B434B2829930F320001041F /* BuilderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuilderProtocol.swift; sourceTree = "<group>"; };
 		6B434B2B299315D60001041F /* CacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheService.swift; sourceTree = "<group>"; };
 		6B434B2D299316040001041F /* CacheServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheServiceProtocol.swift; sourceTree = "<group>"; };
+		6B5DE6922995909900B102DD /* CoreDataServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataServiceProtocol.swift; sourceTree = "<group>"; };
+		6B5DE694299590A000B102DD /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		6B5DE6A32995950200B102DD /* CinemaLibrary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CinemaLibrary.xcdatamodel; sourceTree = "<group>"; };
 		6B99979D29920ED20086777C /* ViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewData.swift; sourceTree = "<group>"; };
 		6B99979F29920EEF0086777C /* CinemaListInternalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaListInternalView.swift; sourceTree = "<group>"; };
 		6B9997A12992114A0086777C /* CinemaListScreenViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaListScreenViewModelProtocol.swift; sourceTree = "<group>"; };
@@ -78,6 +86,8 @@
 		6BB0AEB7290847E600F4B2B9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6BB0AEBA290847E600F4B2B9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6BB0AEBC290847E600F4B2B9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6BD6C27A299422B0004D5461 /* KeychainServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainServiceProtocol.swift; sourceTree = "<group>"; };
+		6BD6C27C299424BF004D5461 /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		6BDB75F5299319DC00526945 /* CinemaDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaDescriptionViewModel.swift; sourceTree = "<group>"; };
 		6BDB75F7299319F500526945 /* CinemaDescriptionViewModelImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaDescriptionViewModelImp.swift; sourceTree = "<group>"; };
 		6BF3413329098C40001448A2 /* CinemaDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CinemaDescriptionViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +230,16 @@
 			path = CinemaListScreen;
 			sourceTree = "<group>";
 		};
+		6B5DE6912995908100B102DD /* CoreDataService */ = {
+			isa = PBXGroup;
+			children = (
+				6B5DE6922995909900B102DD /* CoreDataServiceProtocol.swift */,
+				6B5DE694299590A000B102DD /* CoreDataService.swift */,
+				6B5DE6A22995950200B102DD /* CinemaLibrary.xcdatamodeld */,
+			);
+			path = CoreDataService;
+			sourceTree = "<group>";
+		};
 		6B99979C29920EBA0086777C /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,6 +281,8 @@
 		6BB0AEAD290847E400F4B2B9 /* Movie */ = {
 			isa = PBXGroup;
 			children = (
+				6B5DE6912995908100B102DD /* CoreDataService */,
+				6BD6C27929942287004D5461 /* KeychainService */,
 				6B434B2A299315BE0001041F /* CacheService */,
 				6B434B2129930EAF0001041F /* Coordinator */,
 				6B434B0F2992D1670001041F /* Builder */,
@@ -280,6 +302,15 @@
 				6BB0AEBC290847E600F4B2B9 /* Info.plist */,
 			);
 			path = Movie;
+			sourceTree = "<group>";
+		};
+		6BD6C27929942287004D5461 /* KeychainService */ = {
+			isa = PBXGroup;
+			children = (
+				6BD6C27A299422B0004D5461 /* KeychainServiceProtocol.swift */,
+				6BD6C27C299424BF004D5461 /* KeychainService.swift */,
+			);
+			path = KeychainService;
 			sourceTree = "<group>";
 		};
 		6BDB75F3299319B900526945 /* View */ = {
@@ -437,6 +468,7 @@
 				6BF3413B2909B7C7001448A2 /* OverviewTableViewCell.swift in Sources */,
 				6BF3413D2909BACA001448A2 /* RatingTableViewCell.swift in Sources */,
 				6B9D08652994056200044338 /* NetworkServiceProtocol.swift in Sources */,
+				6BD6C27D299424BF004D5461 /* KeychainService.swift in Sources */,
 				6B434B2C299315D60001041F /* CacheService.swift in Sources */,
 				6B2EC31F29085D7E00DADFD1 /* NetworkModel.swift in Sources */,
 				6BACC491290B04D80011D30E /* NetworkService.swift in Sources */,
@@ -457,15 +489,19 @@
 				6B434B202992EBD10001041F /* ImageServiceImp.swift in Sources */,
 				6B434B2429930ECF0001041F /* BaseCoordinator.swift in Sources */,
 				6B434B142992E8320001041F /* Proxy.swift in Sources */,
+				6B5DE6A42995950300B102DD /* CinemaLibrary.xcdatamodeld in Sources */,
 				6B2EC32229086DA100DADFD1 /* NSConstraint+setPriorityFunc.swift in Sources */,
 				6B434B2929930F320001041F /* BuilderProtocol.swift in Sources */,
 				6B99979E29920ED20086777C /* ViewData.swift in Sources */,
 				6BF34139290995F9001448A2 /* ButtonsTableViewCell.swift in Sources */,
 				6B9997A029920EEF0086777C /* CinemaListInternalView.swift in Sources */,
 				6B434B1E2992EB800001041F /* ImageService.swift in Sources */,
+				6B5DE695299590A000B102DD /* CoreDataService.swift in Sources */,
 				6BF5F48A290B8B0B00A8588A /* Array+safelyAccesToElement.swift in Sources */,
 				6BDB75F8299319F500526945 /* CinemaDescriptionViewModelImp.swift in Sources */,
+				6B5DE6932995909900B102DD /* CoreDataServiceProtocol.swift in Sources */,
 				6B434B2729930F0A0001041F /* ApplicationCoordinator.swift in Sources */,
+				6BD6C27B299422B0004D5461 /* KeychainServiceProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,6 +719,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6B5DE6A22995950200B102DD /* CinemaLibrary.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6B5DE6A32995950200B102DD /* CinemaLibrary.xcdatamodel */,
+			);
+			currentVersion = 6B5DE6A32995950200B102DD /* CinemaLibrary.xcdatamodel */;
+			path = CinemaLibrary.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 6BB0AEA3290847E400F4B2B9 /* Project object */;
 }
