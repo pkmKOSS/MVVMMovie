@@ -12,7 +12,9 @@ protocol CinemaListScreenViewModelProtocol {
     var showErrorAlertHandler: ((String) -> Void)? { get set }
     var showApiKeyAlertHandler: (() -> ())? { get set }
 
-    func setKeychain() -> Bool
+    func checkKeychain() -> Bool
     func cleanUserApiKey()
+    func setKeyChainManual(key: String)
     func fetchCinema(typeOfCinema: TypeOfCinemaRequset)
+    func makeCinemaLibrary(cinemaResponse: Codable) -> [Cinema]?
 }

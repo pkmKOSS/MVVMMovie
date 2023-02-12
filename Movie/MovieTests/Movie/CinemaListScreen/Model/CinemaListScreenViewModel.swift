@@ -1,5 +1,5 @@
 // CinemaListScreenViewModel.swift
-// Copyright © RoadMap. All rights reserved.
+// Copyright © Alexandr Grigorenko. All rights reserved.
 
 import Foundation
 
@@ -13,7 +13,6 @@ final class CinemaListScreenViewModel: CinemaListScreenViewModelProtocol {
     var fetchImageHandler: FetchImageHandler?
     var showErrorAlertHandler: ShowErrorAlertHandler?
     var showApiKeyAlertHandler: (() -> ())?
-    
 
     // MARK: - Private properties
 
@@ -40,7 +39,7 @@ final class CinemaListScreenViewModel: CinemaListScreenViewModelProtocol {
 
     func fetchCinema(typeOfCinema: TypeOfCinemaRequset) {
         guard
-            setKeychain(),
+            checkKeychain(),
             let getPopular = onPopulareCinemaTapHandler,
             let getNew = onNewCinemaTapHandler,
             let getUpcoming = onUpcomingCinemaTapHandler,
@@ -61,6 +60,7 @@ final class CinemaListScreenViewModel: CinemaListScreenViewModelProtocol {
                     }
                 }
             case let .failure(error):
+                guard let error = error else { return }
                 showError(error.localizedDescription)
                 getUpcoming(ViewData.success(self.coreDataService.loadData()))
             }
@@ -101,12 +101,13 @@ final class CinemaListScreenViewModel: CinemaListScreenViewModelProtocol {
             case let .succes(cinema):
                 completion(cinema)
             case let .failure(error):
+                guard let error = error else { return }
                 showError(error.localizedDescription)
             }
         }
     }
 
-    func setKeychain() -> Bool {
+    func checkKeychain() -> Bool {
         let key = keychainService.decodeAPIKey()
         guard let apiAlertHandler = showApiKeyAlertHandler else { return false }
         guard

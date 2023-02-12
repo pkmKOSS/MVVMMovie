@@ -74,7 +74,7 @@ final class NetworkService: NetworkServiceProtocol {
         }.resume()
     }
 
-    private func sendRequest<T: Codable>(
+    func sendRequest<T: Codable>(
         urlString: String,
         model: T.Type,
         completion: @escaping (GetPostResult) -> Void
@@ -101,13 +101,13 @@ final class NetworkService: NetworkServiceProtocol {
 /// Результат обращения к веб сервису с кинофильмами.
 enum GetPostResult {
     case succes(cinema: Codable)
-    case failure(cinema: Error)
+    case failure(cinema: Error?)
 }
 
 /// Результат обращения к веб сервису с кинофильмами.
 enum GetImageResult {
     case succes(cinema: Data)
-    case failure(cinema: Error)
+    case failure(cinema: Error?)
 }
 
 /// Типы запроса в зависимости от получаемого контента.
