@@ -23,4 +23,10 @@ protocol NetworkServiceProtocol {
     /// Метод устанавливает апи кей
     /// - Parameter key: ключ
     func setKeyChainApi(key: String)
+
+    func sendRequest<T: Codable>(
+        urlString: String,
+        model: T.Type,
+        completion: @escaping (GetPostResult) -> Void
+    )
 }

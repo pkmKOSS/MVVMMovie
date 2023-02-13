@@ -14,7 +14,7 @@ final class ImageAPIService: ImageAPIServiceProtocol {
         let request = URLRequest(url: url)
         URLSession.shared.dataTask(with: request) { data, _, error in
             if let data = data {
-                let result = GetImageResult.succes(cinema: data)
+                let result = GetImageResult.success(cinema: data)
                 completion(result)
             } else if let error = error {
                 let result = GetImageResult.failure(cinema: error)

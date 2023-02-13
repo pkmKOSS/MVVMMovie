@@ -4,23 +4,26 @@
 import UIKit
 
 /// Базовый координатор
-class BaseCoordinator {
+class BaseCoordinator: BaseCoordinatorProtocol {
     // MARK: - Public properties
 
-    var childCoordinators: [BaseCoordinator] = []
+    var childCoordinators: [BaseCoordinatorProtocol] = []
+    var isStarted: Bool = false
 
     // MARK: - Public methods
 
-    func start() {}
+    func start() {
+        isStarted.toggle()
+    }
 
-    func addDependency(_ coordinator: BaseCoordinator) {
+    func addDependency(_ coordinator: BaseCoordinatorProtocol) {
         for element in childCoordinators where element === coordinator {
             return
         }
         childCoordinators.append(coordinator)
     }
 
-    func removeDependency(_ coordinator: BaseCoordinator?) {
+    func removeDependency(_ coordinator: BaseCoordinatorProtocol?) {
         guard
             childCoordinators.isEmpty == false,
             let coordinator = coordinator

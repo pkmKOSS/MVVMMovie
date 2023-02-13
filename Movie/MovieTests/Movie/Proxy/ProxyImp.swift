@@ -31,6 +31,6 @@ final class ProxyImp: Proxy {
             }
             return
         }
-        completion(GetImageResult.succes(cinema: imageData))
+        completion(GetImageResult.success(cinema: imageData))
     }
 }
