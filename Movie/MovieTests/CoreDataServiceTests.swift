@@ -4,7 +4,7 @@
 @testable import Movie
 import XCTest
 
-/// Тесты CoreDataService
+/// Тесты сервиса работы с локальной базой данных
 final class CoreDataServiceTests: XCTestCase {
     // MARK: - Private properties
 
@@ -13,10 +13,12 @@ final class CoreDataServiceTests: XCTestCase {
     // MARK: - Publoc methods
 
     override func teardown() {
+        super.teardown()
         coreDataService = nil
     }
 
     override func setUpWithError() throws {
+        super.setUp()
         coreDataService = CoreDataService()
     }
 

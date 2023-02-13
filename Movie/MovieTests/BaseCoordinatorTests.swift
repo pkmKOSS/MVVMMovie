@@ -4,7 +4,7 @@
 @testable import Movie
 import XCTest
 
-/// Тесты BaseCoordinator
+/// Тесты базового координатор
 final class BaseCoordinatorTests: XCTestCase {
     // MARK: - Private properties
 
@@ -14,11 +14,13 @@ final class BaseCoordinatorTests: XCTestCase {
     // MARK: - Public methods
 
     override func setUpWithError() throws {
+        super.setUp()
         baseCoordinator = BaseCoordinator()
         fakeCoordinator = MockCoordinator()
     }
 
     override func teardown() {
+        super.teardown()
         baseCoordinator = nil
         fakeCoordinator = nil
     }

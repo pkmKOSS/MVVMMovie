@@ -4,7 +4,7 @@
 @testable import Movie
 import XCTest
 
-/// Тесты NetworkService
+/// Тесты сервиса работы с сестью
 final class NetworkServiceTests: XCTestCase {
     // MARK: - Private properties
 
@@ -13,10 +13,12 @@ final class NetworkServiceTests: XCTestCase {
     // MARK: - Public methods
 
     override func teardown() {
+        super.teardown()
         networkSerive = nil
     }
 
     override func setUpWithError() throws {
+        super.setUp()
         networkSerive = NetworkService()
     }
 

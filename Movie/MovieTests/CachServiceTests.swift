@@ -4,7 +4,7 @@
 @testable import Movie
 import XCTest
 
-/// Тесты CachService
+/// Тесты сервиса кеширования
 final class CachServiceTests: XCTestCase {
     // MARK: - Private properties
 
@@ -13,10 +13,12 @@ final class CachServiceTests: XCTestCase {
     // MARK: - Public methods
 
     override func teardown() {
+        super.teardown()
         cacheService = nil
     }
 
     override func setUpWithError() throws {
+        super.setUp()
         cacheService = CacheService()
     }
 

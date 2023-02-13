@@ -4,7 +4,7 @@
 @testable import Movie
 import XCTest
 
-/// Тесты CinemaListScreenViewModel
+/// Тесты модели представления списка фильмов
 final class CinemaListScreenViewModelTests: XCTestCase {
     // MARK: - Private properties
 
@@ -20,6 +20,7 @@ final class CinemaListScreenViewModelTests: XCTestCase {
     // MARK: - Public methods
 
     override func teardown() {
+        super.teardown()
         networkService = nil
         imageAPIService = nil
         cacheService = nil
@@ -31,6 +32,7 @@ final class CinemaListScreenViewModelTests: XCTestCase {
     }
 
     override func setUp() {
+        super.setUp()
         networkService = MockNetworkService()
         imageAPIService = MockImageApiService()
         cacheService = MockCacheService()

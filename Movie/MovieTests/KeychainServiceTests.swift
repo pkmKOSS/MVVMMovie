@@ -4,7 +4,7 @@
 @testable import Movie
 import XCTest
 
-/// Тесты  KeychainService
+/// Тесты  сервиса работы с зашифрованной информацией
 final class KeychainServiceTests: XCTestCase {
     // MARK: - Private properties
 
@@ -13,15 +13,14 @@ final class KeychainServiceTests: XCTestCase {
     // MARK: - Public methods
 
     override func teardown() {
+        super.teardown()
+        keychainService.deleteAPIKey()
         keychainService = nil
     }
 
     override func setUpWithError() throws {
+        super.setUp()
         keychainService = KeychainService()
-    }
-
-    override func tearDown() {
-        keychainService.deleteAPIKey()
     }
 
     func testSaveAPI() {
