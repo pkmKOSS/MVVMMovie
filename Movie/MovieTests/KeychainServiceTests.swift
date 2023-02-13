@@ -12,6 +12,10 @@ final class KeychainServiceTests: XCTestCase {
 
     // MARK: - Public methods
 
+    override func teardown() {
+        keychainService = nil
+    }
+
     override func setUpWithError() throws {
         keychainService = KeychainService()
     }

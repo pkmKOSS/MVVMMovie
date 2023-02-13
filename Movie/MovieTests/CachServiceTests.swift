@@ -12,6 +12,10 @@ final class CachServiceTests: XCTestCase {
 
     // MARK: - Public methods
 
+    override func teardown() {
+        cacheService = nil
+    }
+
     override func setUpWithError() throws {
         cacheService = CacheService()
     }

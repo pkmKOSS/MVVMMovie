@@ -19,6 +19,17 @@ final class CinemaListScreenViewModelTests: XCTestCase {
 
     // MARK: - Public methods
 
+    override func teardown() {
+        networkService = nil
+        imageAPIService = nil
+        cacheService = nil
+        keychainService = nil
+        coreDataService = nil
+        proxy = nil
+        imageService = nil
+        cinemaListScreenViewModel = nil
+    }
+
     override func setUp() {
         networkService = MockNetworkService()
         imageAPIService = MockImageApiService()

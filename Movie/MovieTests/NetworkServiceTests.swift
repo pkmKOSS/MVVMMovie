@@ -12,11 +12,15 @@ final class NetworkServiceTests: XCTestCase {
 
     // MARK: - Public methods
 
+    override func teardown() {
+        networkSerive = nil
+    }
+
     override func setUpWithError() throws {
         networkSerive = NetworkService()
     }
 
-    func testGetCinema() throws {
+    func testFetchPopularCinema() throws {
         networkSerive.getCinema(typeOfRequest: .getPopular) { result in
             switch result {
             case let .succes(cinema):
@@ -26,7 +30,9 @@ final class NetworkServiceTests: XCTestCase {
                 XCTAssertNil(error)
             }
         }
+    }
 
+    func testFetchUpcomingCinema() throws {
         networkSerive.getCinema(typeOfRequest: .getUpcoming) { result in
             switch result {
             case let .succes(cinema):
@@ -36,7 +42,9 @@ final class NetworkServiceTests: XCTestCase {
                 XCTAssertNil(error)
             }
         }
+    }
 
+    func testFetchNewCinema() throws {
         networkSerive.getCinema(typeOfRequest: .getNew) { result in
             switch result {
             case let .succes(cinema):

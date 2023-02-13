@@ -18,6 +18,11 @@ final class BaseCoordinatorTests: XCTestCase {
         fakeCoordinator = MockCoordinator()
     }
 
+    override func teardown() {
+        baseCoordinator = nil
+        fakeCoordinator = nil
+    }
+
     func testAddDependency() throws {
         baseCoordinator.addDependency(fakeCoordinator)
         baseCoordinator.addDependency(fakeCoordinator)

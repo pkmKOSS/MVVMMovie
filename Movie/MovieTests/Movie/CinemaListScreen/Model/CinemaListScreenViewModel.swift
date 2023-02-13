@@ -98,7 +98,7 @@ final class CinemaListScreenViewModel: CinemaListScreenViewModelProtocol {
         else { return }
         imageService.fetchImage(posterPath: posterPath, size: size) { result in
             switch result {
-            case let .succes(cinema):
+            case let .success(cinema):
                 completion(cinema)
             case let .failure(error):
                 guard let error = error else { return }

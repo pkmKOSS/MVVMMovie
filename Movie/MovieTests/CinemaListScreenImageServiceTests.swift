@@ -4,7 +4,7 @@
 @testable import Movie
 import XCTest
 
-/// Тесты CinemaListScreenImageServic
+/// Тесты CinemaListScreenImageService
 final class CinemaListScreenImageServiceTests: XCTestCase {
     // MARK: - Private properties
 
@@ -14,6 +14,13 @@ final class CinemaListScreenImageServiceTests: XCTestCase {
     private var proxy: Proxy!
 
     // MARK: - Public methods
+
+    override func teardown() {
+        imageAPIService = nil
+        cacheService = nil
+        proxy = nil
+        imageService = nil
+    }
 
     override func setUpWithError() throws {
         imageAPIService = MockImageApiService()

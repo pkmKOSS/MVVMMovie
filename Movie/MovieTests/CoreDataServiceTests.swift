@@ -12,6 +12,10 @@ final class CoreDataServiceTests: XCTestCase {
 
     // MARK: - Publoc methods
 
+    override func teardown() {
+        coreDataService = nil
+    }
+
     override func setUpWithError() throws {
         coreDataService = CoreDataService()
     }

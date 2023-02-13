@@ -1,7 +1,6 @@
 // MockCoordinator.swift
 // Copyright © Alexandr Grigorenko. All rights reserved.
 
-import Foundation
 @testable import Movie
 import UIKit
 

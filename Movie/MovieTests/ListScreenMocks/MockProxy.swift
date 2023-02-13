@@ -1,7 +1,6 @@
 // MockProxy.swift
 // Copyright © Alexandr Grigorenko. All rights reserved.
 
-import Foundation
 @testable import Movie
 
 /// Моковый класс Proxy

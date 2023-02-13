@@ -1,7 +1,6 @@
 // MockCoreDataService.swift
 // Copyright © Alexandr Grigorenko. All rights reserved.
 
-import Foundation
 @testable import Movie
 
 /// Моковый класс CoreDataServic

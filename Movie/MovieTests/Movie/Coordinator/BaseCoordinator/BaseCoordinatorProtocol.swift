@@ -3,6 +3,7 @@
 
 import UIKit
 
+/// Протокол основного координатора
 protocol BaseCoordinatorProtocol: AnyObject {
     var childCoordinators: [BaseCoordinatorProtocol] { get set }
     var isStarted: Bool { get set }
